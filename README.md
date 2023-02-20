@@ -19,6 +19,9 @@
 $  git clone https://github.com/DmitriyLedovskih/mesto-react.git
 ```
 ```
+$  cd mesto-react
+```
+```
 $  npm i react
 ```
 ```
