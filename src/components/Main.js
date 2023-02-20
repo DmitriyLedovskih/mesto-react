@@ -9,10 +9,16 @@ function Main(props) {
     api.getProfileInfo()
       .then(result => {
         setInfo(result);
+      })
+      .catch(err => {
+        console.log(err);
       });
       api.getInitialCards()
         .then(result => {
           setCards(result);
+        })
+        .catch(err => {
+          console.log(err);
         });
   }, [])
 

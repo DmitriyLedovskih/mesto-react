@@ -6,34 +6,34 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
-  const [isOpenAvatar, isEditAvatarPopupOpen] = React.useState(false);
-  const [isOpenEditProfile, isEditProfilePopupOpen] = React.useState(false);
-  const [isOpenAdd, isAddPlacePopupOpen] = React.useState(false);
-  const [isOpenimage, isImagePopupOpen] = React.useState(false);
+  const [isAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isimagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   
   function closeAllPopups() {
-    isEditAvatarPopupOpen(false);
-    isEditProfilePopupOpen(false);
-    isAddPlacePopupOpen(false);
-    isImagePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsImagePopupOpen(false);
     setSelectedCard({});
   }
 
   function handleEditAvatarClick() {
-    isEditAvatarPopupOpen(!isOpenAvatar);
+    setIsEditAvatarPopupOpen(!isAvatarPopupOpen);
   }
 
   function handleEditProfileClick() {
-    isEditProfilePopupOpen(!isOpenEditProfile);
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
   }
 
   function handleAddPlaceClick() {
-    isAddPlacePopupOpen(!isOpenAdd);
+    setIsAddPlacePopupOpen(!isAddPopupOpen);
   }
 
   function handleCardClick(card) {
-    isImagePopupOpen(!isOpenimage);
+    setIsImagePopupOpen(!isimagePopupOpen);
     // console.log(card);
     setSelectedCard(card);
   }
@@ -43,48 +43,40 @@ function App() {
       <Header />
       <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onImage={handleCardClick} />
       <Footer />
-      <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isOpenAvatar} onClose={closeAllPopups}
-        children={
-          <>
-          <label class="popup__form-field">
-            <input type="url" class="popup__form-input" name="avatar" placeholder="Аватарка" required id="input-avatar" />
-            <span class="popup__form-error input-avatar-error"></span>
+      <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isAvatarPopupOpen} onClose={closeAllPopups} buttonText="Сохранить">
+        <>
+          <label className="popup__form-field">
+            <input type="url" className="popup__form-input" name="avatar" placeholder="Аватарка" required id="input-avatar" />
+            <span className="popup__form-error input-avatar-error"></span>
           </label>
-          <button class="popup__form-button" type="submit">Сохранить</button>
-          </>
-        }
-      />
-      <PopupWithForm name="edit" title="Редактировать профиль" isOpen={isOpenEditProfile} onClose={closeAllPopups}
-        children={
-          <>
-            <label class="popup__form-field">
-              <input type="text" class="popup__form-input" name="name" placeholder="Ваше имя" required id="input-name" minlength="2" maxlength="40" />
-              <span class="popup__form-error input-name-error"></span>
-            </label>
-            <label class="popup__form-field">
-              <input type="text" class="popup__form-input" name="about" placeholder="О себе" required id="input-description" minlength="2" maxlength="200" />
-              <span class="popup__form-error input-description-error"></span>
-            </label>
-            <button class="popup__form-button" type="submit">Сохранить</button>
-          </>
-        }
-      />
-      <PopupWithForm name="add" title="Новое место" isOpen={isOpenAdd} onClose={closeAllPopups}
-        children={
-          <>
-            <label class="popup__form-field">
-            <input type="text" class="popup__form-input" name="name" placeholder="Название" required minlength="2" maxlength="30" id="input-title" />
-            <span class="popup__form-error input-title-error"></span>
-          </label>
-          <label class="popup__form-field">
-            <input type="url" class="popup__form-input" name="link" placeholder="Ссылка на картинку" required id="input-link" />
-            <span class="popup__form-error input-link-error"></span>
-          </label>
-          <button class="popup__form-button" type="submit">Создать</button>
         </>
-        }
-      />
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isOpenimage} />
+      </PopupWithForm>
+      <PopupWithForm name="edit" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} buttonText="Сохранить">
+        <>
+          <label className="popup__form-field">
+            <input type="text" className="popup__form-input" name="name" placeholder="Ваше имя" required id="input-name" />
+            <span className="popup__form-error input-name-error"></span>
+          </label>
+          <label className="popup__form-field">
+            <input type="text" className="popup__form-input" name="about" placeholder="О себе" required id="input-description" />
+            <span className="popup__form-error input-description-error"></span>
+          </label>
+        </>
+      </PopupWithForm>
+      <PopupWithForm name="add" title="Новое место" isOpen={isAddPopupOpen} onClose={closeAllPopups} buttonText="Создать"
+      >
+        <>
+          <label className="popup__form-field">
+            <input type="text" className="popup__form-input" name="name" placeholder="Название" required id="input-title" />
+            <span className="popup__form-error input-title-error"></span>
+          </label>
+          <label className="popup__form-field">
+            <input type="url" className="popup__form-input" name="link" placeholder="Ссылка на картинку" required id="input-link" />
+            <span className="popup__form-error input-link-error"></span>
+          </label>
+        </>
+      </PopupWithForm>
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isimagePopupOpen} />
     </div>
   );
 }

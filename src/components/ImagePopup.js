@@ -1,9 +1,8 @@
 import React from 'react';
 
 function ImagePopup(props) {
-  if (props.isOpen) {
     return (
-      <div className="popup popup_type_image">
+      <div className={`popup popup_type_image ${props.isOpen ? 'popup_opened' : ''}`}>
         <div className="popup__container-image">
           <button className="popup__close-button" onClick={() => props.onClose()}></button>
           <figure className="popup__figure">
@@ -13,7 +12,6 @@ function ImagePopup(props) {
         </div>
       </div>
     )
-  }
 }
 
 export default ImagePopup;
